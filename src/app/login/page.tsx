@@ -29,17 +29,13 @@ export default function LoginPage() {
 
   const onLogin = async (values: z.infer<typeof formSchema>) => {
     try {
-
       const response = await axios.post("/api/users/login", values);
       console.log(response);
       toast.success("Login Successful");
       router.push("/profile");
-
     } catch (error: any) {
-
-      toast.error("Error logging in", error.message);
+      toast.error("Error ", error.response.data.message);
       console.log("Login Failed", error);
-      
     }
   };
 
