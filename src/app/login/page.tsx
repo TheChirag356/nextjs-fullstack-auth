@@ -87,7 +87,7 @@ export default function LoginPage() {
           Forgot your password? <Link href="/forgotpassword" className="text-blue-500">Click Here</Link>
         </div>
         <div className="mt-4">
-          Don't have an account yet? <Link href="/signup" className="text-blue-500">Signup Here</Link>
+          Don&apos;t have an account yet? <Link href="/signup" className="text-blue-500">Signup Here</Link>
         </div>
       </div>
     </div>

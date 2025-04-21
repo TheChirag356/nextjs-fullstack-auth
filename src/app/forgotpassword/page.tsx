@@ -23,8 +23,6 @@ const formSchema = z.object({
 });
 
 export default function ForgotPasswordPage() {
-  const router = useRouter();
-
   const forgotPassword = async (values: z.infer<typeof formSchema>) => {
     try {
       toast.promise(axios.post("/api/users/forgotpassword", values), {
