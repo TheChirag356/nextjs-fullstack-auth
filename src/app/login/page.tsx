@@ -28,7 +28,7 @@ export default function LoginPage() {
 
   const onLogin = async (values: z.infer<typeof formSchema>) => {
     try {
-      toast.promise(axios.post("/api/users/login", values), {
+      await toast.promise(axios.post("/api/users/login", values), {
         loading: "Logging in...",
         success: "Logged in successfully",
         error: "Error logging in",
