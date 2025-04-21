@@ -38,7 +38,7 @@ export default function ProfilePage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-screen py-2 text-center">
       <h1>Profile Page</h1>
-      <h2>{data ? <Link href={`/profile/${data}`}>Redirect to your profile</Link> : ""}</h2>
+      <h2>{data ? <Link className="text-blue-500" href={`/profile/${data}`}>Redirect to your profile</Link> : ""}</h2>
       <Button className="mt-4" onClick={logout}>
         Logout
       </Button>

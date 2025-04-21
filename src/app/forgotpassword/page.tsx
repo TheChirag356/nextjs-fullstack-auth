@@ -20,23 +20,20 @@ import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8).max(50),
 });
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   const router = useRouter();
 
-  const onLogin = async (values: z.infer<typeof formSchema>) => {
+  const forgotPassword = async (values: z.infer<typeof formSchema>) => {
     try {
-      toast.promise(axios.post("/api/users/login", values), {
-        loading: "Logging in...",
-        success: "Logged in successfully",
-        error: "Error logging in",
+      toast.promise(axios.post("/api/users/forgotpassword", values), {
+        loading: "Loading ...",
+        success: "Check your email for the reset link",
+        error: "Error sending reset link",
       });
-
-      router.push("/profile");
     } catch (error: any) {
-      console.log("Login Failed", error);
+      console.log("Forgot Password Failed", error);
     }
   };
 
@@ -44,16 +41,18 @@ export default function LoginPage() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-screen py-2 text-center">
-      <h1 className="font-bold text-4xl mb-8">Login</h1>
+      <h1 className="font-bold text-4xl mb-8">Forgot Password</h1>
       <div className="w-1/5">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onLogin)} className="space-y-8">
+          <form
+            onSubmit={form.handleSubmit(forgotPassword)}
+            className="space-y-8"
+          >
             <FormField
               control={form.control}
               name="email"
@@ -67,27 +66,15 @@ export default function LoginPage() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Password" type="password" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit">Login</Button>
+
+            <Button type="submit">Update Password</Button>
           </form>
         </Form>
         <div className="mt-4">
-          Forgot your password? <Link href="/forgotpassword" className="text-blue-500">Click Here</Link>
-        </div>
-        <div className="mt-4">
-          Don't have an account yet? <Link href="/signup" className="text-blue-500">Signup Here</Link>
+          Go back to the{" "}
+          <Link href="/login" className="text-blue-500">
+            Login Page
+          </Link>
         </div>
       </div>
     </div>

@@ -29,21 +29,16 @@ export default function SignupPage() {
   const router = useRouter();
 
   const onSignup = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     try {
-      
-      const response = await axios.post("/api/users/signup", values);
-      console.log("Signup Success", response.data);
-
-      toast.success("User created successfully");
+      toast.promise(axios.post("/api/users/signup", values), {
+        loading: "Creating user...",
+        success: "User created successfully",
+        error: "Error creating user",
+      });
 
       router.push("/login");
-      
     } catch (error: any) {
-
-      toast.error("Error creating user", error.message);
-      console.log(error);
-
+      console.error("Signup error:", error);
     }
   };
 
@@ -107,7 +102,7 @@ export default function SignupPage() {
           </form>
         </Form>
         <div className="mt-4">
-          Don't have an account yet? <Link href="/login">Login Here</Link>
+          Already have an account? <Link className="text-blue-500" href="/login">Login Here</Link>
         </div>
       </div>
     </div>
